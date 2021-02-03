@@ -3,7 +3,10 @@ Train an encoder/decoder on the MNIST dataset.
 """
 
 import os
-
+import sys
+sys.path.append("../")
+sys.path.append("../../")
+sys.path.append("../../../")
 from PIL import Image
 import numpy as np
 import torch
@@ -26,7 +29,7 @@ def main():
         batch = batch.to(DEVICE)
         terms = vae(batch)
         print('step %d: loss=%f mse=%f' %
-              (i, terms['loss'].item(), terms['mse'][-1].item()))
+              (i, terms['loss'].item(), terms['losses'][-1].item()))
         optimizer.zero_grad()
         terms['loss'].backward()
         optimizer.step()
